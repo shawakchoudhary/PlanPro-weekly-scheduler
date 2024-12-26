@@ -1,9 +1,9 @@
 import {Button} from '@headlessui/react';
 import { Dispatch, SetStateAction } from 'react';
-type Props = {
-    ele : String
-    arr : String[]
-    setArr : Dispatch<SetStateAction<String[]>>
+interface Props {
+    ele : string
+    arr : string[]
+    setArr : Dispatch<SetStateAction<string[]>>
 }
 export default function CrossButton(props : Props){
     const {ele, arr, setArr} = props;

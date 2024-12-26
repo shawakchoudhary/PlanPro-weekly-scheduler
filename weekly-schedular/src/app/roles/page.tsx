@@ -17,7 +17,7 @@ export default function Roles(){
             setNewRole("")
         }
     }
-
+  
     return <>
         <h1 className="font-bold text-center text-4xl text-white mt-3">Step 1: Identifying Roles</h1>
         <p className="font text-justify mx-12 text-xl text-white mt-7">

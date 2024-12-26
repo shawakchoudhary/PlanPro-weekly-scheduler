@@ -6,9 +6,9 @@ export default function About(){
             <h1 className="font-bold text-center my-5 text-4xl text-white">About Us</h1>
             <p className="font text-justify mx-12 text-xl text-white">
             Welcome to The PlanPro Weekly Schedular, a platform inspired by the timeless wisdom of Stephen R. Covey's 7 Habits of Highly Effective People. 
-            We believe that effective time management goes beyond checking off to-do lists—it’s about living a life that reflects your values, achieves your goals, 
+            We believe that effective time management goes beyond checking off to-do lists—it&#39;s about living a life that reflects your values, achieves your goals, 
             and nurtures all aspects of your well-being. 
-            Our mission is to help individuals and teams plan their weeks with purpose, focusing on what truly matters and finding balance amidst life’s demands.
+            Our mission is to help individuals and teams plan their weeks with purpose, focusing on what truly matters and finding balance amidst life&#39;s demands.
             </p>
             <h2 className="font-bold text-center my-5 text-2xl text-white">Why We Exist?</h2>
             <p className="font text-justify mx-12 text-xl text-white">
@@ -18,17 +18,17 @@ export default function About(){
             <h2 className="font-bold text-center my-5 text-2xl text-white">What We Offer?</h2>
             <ul>
               <li className="font text-justify mx-12 text-xl text-white"><b>1. Role-Based Scheduling:</b> Align your weekly plans with your key roles in life, ensuring holistic growth and progress.</li>
-              <li className="font text-justify mx-12 text-xl text-white"><b>2. Prioritization Tools:</b> Focus on what matters most, using Covey’s principles to guide your time management.</li>
+              <li className="font text-justify mx-12 text-xl text-white"><b>2. Prioritization Tools:</b> Focus on what matters most, using Covey&#39;s principles to guide your time management.</li>
               <li className="font text-justify mx-12 text-xl text-white"><b>3. Flexibility and Simplicity:</b> Adapt your schedule as life unfolds, without losing sight of your bigger picture.</li>
               <li className="font text-justify mx-12 text-xl text-white"><b>4. Empowerment Through Planning:</b> Shift from reactive to proactive living, creating a meaningful and fulfilling life.</li>
             </ul>
             <h2 className="font-bold text-center my-5 text-2xl text-white">Our Inspiration</h2>
             <p className="font text-justify mx-12 text-xl text-white">
-            Our platform is deeply rooted in the principle of "Put First Things First"—prioritizing important tasks that align with your values and goals. 
-            By integrating Covey’s proven framework, we offer a tool to help you stay organized, intentional, and balanced. 
+            Our platform is deeply rooted in the principle of &#34;Put First Things First&#34;—prioritizing important tasks that align with your values and goals. 
+            By integrating Covey&#39;s proven framework, we offer a tool to help you stay organized, intentional, and balanced. 
             </p>
             <p className="font text-justify mx-12 text-xl text-white my-3">
-            Join us in redefining how you approach your week. Let’s build a life where your actions align with your purpose, one week at a time.
+            Join us in redefining how you approach your week. Let&#39;s build a life where your actions align with your purpose, one week at a time.
             </p>
             <Link
             href="/roles"

@@ -2,18 +2,8 @@
 
 import Link from "next/link";
 import GoalsCard from "./goals-card/page";
-import { useRouter } from "next/router";
-import {useState, useEffect } from "react";
 
 export default function Goals(){
-    const router = useRouter();
-    const [role,setRoles]=useState<String[]>([]);
-
-    useEffect(()=>{
-        if(router.query.data){
-            setRoles(JSON.parse(router.query.data as string))
-        }
-    })
     const roles = ["son","Father","employee","fsdfdsf"];
     return <>
     <h1 className="font-bold text-center text-4xl text-white mt-3">Step 2: Selecting Goals</h1>
