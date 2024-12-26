@@ -1,17 +1,16 @@
 import {Button} from '@headlessui/react';
 import { Dispatch, SetStateAction } from 'react';
-interface Props {
+type Props = {
     ele : string
-    arr : string[]
     setArr : Dispatch<SetStateAction<string[]>>
 }
-export default function CrossButton(props : Props){
-    const {ele, arr, setArr} = props;
-    function handleCancelClick(role : String){
-        setArr(arr.filter((r)=> role !== r))
+export default function CrossButton({ele,setArr} : Props){
+   // const {ele, arr, setArr} = props;
+    const handleCancelClick = ()=>{
+        setArr((prevArr) => prevArr.filter((item) => item !== ele));
     }
     return   <Button
-                    onClick={()=> handleCancelClick(ele)}
+                    onClick={handleCancelClick}
                     className="m-2 bg-red-500 text-white rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                                 aria-label="Close"
                                 >

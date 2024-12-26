@@ -5,14 +5,14 @@ export default function About(){
       <div>
             <h1 className="font-bold text-center my-5 text-4xl text-white">About Us</h1>
             <p className="font text-justify mx-12 text-xl text-white">
-            Welcome to The PlanPro Weekly Schedular, a platform inspired by the timeless wisdom of Stephen R. Covey's 7 Habits of Highly Effective People. 
+            Welcome to The PlanPro Weekly Schedular, a platform inspired by the timeless wisdom of Stephen R. Covey&#39;s 7 Habits of Highly Effective People. 
             We believe that effective time management goes beyond checking off to-do lists—it&#39;s about living a life that reflects your values, achieves your goals, 
             and nurtures all aspects of your well-being. 
             Our mission is to help individuals and teams plan their weeks with purpose, focusing on what truly matters and finding balance amidst life&#39;s demands.
             </p>
             <h2 className="font-bold text-center my-5 text-2xl text-white">Why We Exist?</h2>
             <p className="font text-justify mx-12 text-xl text-white">
-            In a world filled with distractions and demands, it's easy to lose sight of long-term goals while juggling daily tasks. 
+            In a world filled with distractions and demands, it&#39;s easy to lose sight of long-term goals while juggling daily tasks. 
             Our weekly scheduler is designed to bring clarity, balance, and effectiveness to your life by focusing on important but non-urgent priorities. 
             </p>
             <h2 className="font-bold text-center my-5 text-2xl text-white">What We Offer?</h2>

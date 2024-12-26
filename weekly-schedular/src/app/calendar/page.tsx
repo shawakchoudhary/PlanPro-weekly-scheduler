@@ -1,20 +1,20 @@
 "use client"
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin, { Draggable, DropArg } from '@fullcalendar/interaction'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import { Fragment, useEffect, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
-import { EventSourceInput } from '@fullcalendar/core/index.js'
+// import FullCalendar from '@fullcalendar/react'
+// import dayGridPlugin from '@fullcalendar/daygrid'
+// import interactionPlugin, { Draggable, DropArg } from '@fullcalendar/interaction'
+// import timeGridPlugin from '@fullcalendar/timegrid'
+// import { Fragment, useEffect, useState } from 'react'
+// import { Dialog, Transition } from '@headlessui/react'
+// import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
+// import { EventSourceInput } from '@fullcalendar/core/index.js'
 
 
-interface Event {
-  title: string;
-  start: Date | string;
-  allDay: boolean;
-  id: number;
-}
+// interface Event {
+//   title: string;
+//   start: Date | string;
+//   allDay: boolean;
+//   id: number;
+// }
 
 export default function Calendar() {
   // const [events, setEvents] = useState([
@@ -24,96 +24,96 @@ export default function Calendar() {
   //   { title: 'event 4', id: '4' },
   //   { title: 'event 5', id: '5' },
   // ])
-  const events = [
-    { title: 'event 1', id: '1' },
-    { title: 'event 2', id: '2' },
-    { title: 'event 3', id: '3' },
-    { title: 'event 4', id: '4' },
-    { title: 'event 5', id: '5' },
-  ]
+  // const events = [
+  //   { title: 'event 1', id: '1' },
+  //   { title: 'event 2', id: '2' },
+  //   { title: 'event 3', id: '3' },
+  //   { title: 'event 4', id: '4' },
+  //   { title: 'event 5', id: '5' },
+  // ]
 
-  const [allEvents, setAllEvents] = useState<Event[]>([])
-  const [showModal, setShowModal] = useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [idToDelete, setIdToDelete] = useState<number | null>(null)
-  const [newEvent, setNewEvent] = useState<Event>({
-    title: '',
-    start: '',
-    allDay: false,
-    id: 0
-  })
+  // const [allEvents, setAllEvents] = useState<Event[]>([])
+  // const [showModal, setShowModal] = useState(false)
+  // const [showDeleteModal, setShowDeleteModal] = useState(false)
+  // const [idToDelete, setIdToDelete] = useState<number | null>(null)
+  // const [newEvent, setNewEvent] = useState<Event>({
+  //   title: '',
+  //   start: '',
+  //   allDay: false,
+  //   id: 0
+  // })
 
-  useEffect(() => {
-    const draggableEl = document.getElementById('draggable-el')
-    if (draggableEl) {
-      new Draggable(draggableEl, {
-        itemSelector: ".fc-event",
-        eventData: function (eventEl) {
-          const title = eventEl.getAttribute("title")
-          const id = eventEl.getAttribute("data")
-          const start = eventEl.getAttribute("start")
-          return { title, id, start }
-        }
-      })
-    }
-  }, [])
+  // useEffect(() => {
+  //   const draggableEl = document.getElementById('draggable-el')
+  //   if (draggableEl) {
+  //     new Draggable(draggableEl, {
+  //       itemSelector: ".fc-event",
+  //       eventData: function (eventEl) {
+  //         const title = eventEl.getAttribute("title")
+  //         const id = eventEl.getAttribute("data")
+  //         const start = eventEl.getAttribute("start")
+  //         return { title, id, start }
+  //       }
+  //     })
+  //   }
+  // }, [])
 
-  function handleDateClick(arg: { date: Date, allDay: boolean }) {
-    setNewEvent({ ...newEvent, start: arg.date, allDay: arg.allDay, id: new Date().getTime() })
-    setShowModal(true)
-  }
+  // function handleDateClick(arg: { date: Date, allDay: boolean }) {
+  //   setNewEvent({ ...newEvent, start: arg.date, allDay: arg.allDay, id: new Date().getTime() })
+  //   setShowModal(true)
+  // }
 
-  function addEvent(data: DropArg) {
-    const event = { ...newEvent, start: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() }
-    setAllEvents([...allEvents, event])
-  }
+  // function addEvent(data: DropArg) {
+  //   const event = { ...newEvent, start: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() }
+  //   setAllEvents([...allEvents, event])
+  // }
 
-  function handleDeleteModal(data: { event: { id: string } }) {
-    setShowDeleteModal(true)
-    setIdToDelete(Number(data.event.id))
-  }
+  // function handleDeleteModal(data: { event: { id: string } }) {
+  //   setShowDeleteModal(true)
+  //   setIdToDelete(Number(data.event.id))
+  // }
 
-  function handleDelete() {
-    setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-    setShowDeleteModal(false)
-    setIdToDelete(null)
-  }
+  // function handleDelete() {
+  //   setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
+  //   setShowDeleteModal(false)
+  //   setIdToDelete(null)
+  // }
 
-  function handleCloseModal() {
-    setShowModal(false)
-    setNewEvent({
-      title: '',
-      start: '',
-      allDay: false,
-      id: 0
-    })
-    setShowDeleteModal(false)
-    setIdToDelete(null)
-  }
+  // function handleCloseModal() {
+  //   setShowModal(false)
+  //   setNewEvent({
+  //     title: '',
+  //     start: '',
+  //     allDay: false,
+  //     id: 0
+  //   })
+  //   setShowDeleteModal(false)
+  //   setIdToDelete(null)
+  // }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setNewEvent({
-      ...newEvent,
-      title: e.target.value
-    })
-  }
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  //   setNewEvent({
+  //     ...newEvent,
+  //     title: e.target.value
+  //   })
+  // }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setAllEvents([...allEvents, newEvent])
-    setShowModal(false)
-    setNewEvent({
-      title: '',
-      start: '',
-      allDay: false,
-      id: 0
-    })
-  }
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault()
+  //   setAllEvents([...allEvents, newEvent])
+  //   setShowModal(false)
+  //   setNewEvent({
+  //     title: '',
+  //     start: '',
+  //     allDay: false,
+  //     id: 0
+  //   })
+  // }
 
   return (
     <>
       <h1 className="font-bold text-5xl text-white">Calendar</h1>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      {/* <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="grid grid-cols-10">
           <div className="col-span-8">
             <FullCalendar
@@ -134,8 +134,8 @@ export default function Calendar() {
               selectable={true}
               selectMirror={true}
               dateClick={handleDateClick}
-              drop={(data) => addEvent(data)}
-              eventClick={(data) => handleDeleteModal(data)}
+              drop={(data: DropArg) => addEvent(data)}
+              eventClick={(data: { event: { id: string } }) => handleDeleteModal(data)}
             />
           </div>
           <div id="draggable-el" className="ml-8 w-full border-2 p-2 rounded-md mt-16 lg:h-1/2 bg-violet-50">
@@ -286,7 +286,7 @@ export default function Calendar() {
             </div>
           </Dialog>
         </Transition.Root>
-      </main >
+      </main > */}
     </>
   )
 }
