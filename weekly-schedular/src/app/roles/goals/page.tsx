@@ -2,9 +2,21 @@
 
 import Link from "next/link";
 import GoalsCard from "../../../components/goals-card/page";
+import { useEffect, useState } from "react";
 
+interface RoleGoals {
+  role: string;
+  goals: string[];
+}
 export default function Goals(){
-    const roles = ["son","Father","employee","fsdfdsf"];
+    const [roles,setRoles] = useState<string[]>([]);
+    const [rolesGoals,setRolesGoals] = useState<RoleGoals[]>(roles.map((role) => ({ role, goals: [] })));
+    useEffect(() => {
+        const storedRoles = sessionStorage.getItem('roles');
+        if (storedRoles) {
+          setRoles(JSON.parse(storedRoles));
+        }
+      }, []);
     return <>
     <h1 className="font-bold text-center text-4xl text-white mt-3">Step 2: Selecting Goals</h1>
     <p className="font text-justify mx-12 text-xl text-white mt-7">
@@ -24,7 +36,7 @@ export default function Goals(){
         {roles.length > 0 && (
             roles.map((role,index)=>(
                <div key={index}>
-                 <GoalsCard role = {role} />
+                 <GoalsCard role = {role} rolesGoals={rolesGoals} />
                </div>
             ))
         )}

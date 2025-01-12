@@ -3,10 +3,17 @@ import {Button, Input} from "@headlessui/react";
 import {SetStateAction, useState} from "react";
 import Link from "next/link";
 import CrossButton from "@/components/cross-button/page";
+import { useRouter } from "next/navigation";
 
 export default function Roles(){
-    const [roles,setRoles] = useState<string[]>([]);
+    const [roles,setRoles] = useState<string[]>([]);    
     const [newRole, setNewRole] = useState("");
+    const router = useRouter();
+
+    const handleNext = () => {
+        sessionStorage.setItem('roles', JSON.stringify(roles));
+        router.push('roles/goals');
+      };
     
     function handleInputChange(e: { target: { value: SetStateAction<string>}}){
         return setNewRole(e.target.value);
@@ -28,11 +35,11 @@ export default function Roles(){
         <p className="font text-justify mx-12 text-xl text-white my-3">
         Once you&#39;ve identified your key roles, List your key roles below to start creating a balanced and purposeful weekly plan.
         </p>
-        <div >
+        <div className="flex justify-center">
             {roles.length  > 0  && (
-                <div className="flex flex-col border-2 rounded-lg w-96 m-5">
+                <div className="flex content-center flex-col border-2 rounded-lg w-96 m-5">
                     <h2 className="font-bold text-center text-3xl text-white m-3">Your Roles:</h2>
-                    <ul className="flex flex-row justify-center">
+                    <ul className="flex flex-col justify-center">
                     {(roles.map((role, index) => (
                         <li className="font-bold text-center text-2xl text-white m-3" key={index}>{index + 1}. {role} 
                            <CrossButton ele = {role} setArr={setRoles} />
@@ -67,16 +74,13 @@ export default function Roles(){
                     Back
                 </Button>
                 </Link> */}
-                <Link 
-                href="roles/goals"
-                >
                 <Button
+                onClick={handleNext}
                 className="rounded w-16 bg-sky-600 py-2 px-4 text-sm text-white hover:bg-sky-800 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
                 disabled={roles.length === 0}
                 >
                     Next
                 </Button>
-                </Link>
            </div>
         </>
 }
