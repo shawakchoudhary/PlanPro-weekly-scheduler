@@ -1,14 +1,21 @@
 'use client'
 
 import { Button, Input } from "@headlessui/react";
-import { SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import CrossButton from "@/components/cross-button/page";
+import GoalsCrossButton from "../goals-cross-button/page";
+
+interface RoleGoals {
+    role: string;
+    goals: string[];
+  }
 
 type Props = {
     role: string
+    setRolesGoals : Dispatch<SetStateAction<RoleGoals[]>>
 }
 
-export default function GoalsCard({role} : Props){
+export default function GoalsCard({role,setRolesGoals} : Props){
         const [newGoal,setNewGoal] = useState("");
         const [goals,setGoals] = useState<string[]>([]);
 
@@ -16,10 +23,12 @@ export default function GoalsCard({role} : Props){
             return setNewGoal(e.target.value);
         }
         function AddNewGoal(){
-            if(newGoal && !goals.includes(newGoal)){
-                setGoals([...goals,newGoal]);
-                setNewGoal("")
-            }
+            if(!role || !newGoal) return;
+            setRolesGoals((prevRolesGoals) => 
+            prevRolesGoals.map((rg)=>
+            rg.role === role
+            ? {...rg,goals:[...rg.goals,newGoal]}
+            : rg))
         }
     return <div>
         {(role && (
@@ -29,7 +38,7 @@ export default function GoalsCard({role} : Props){
             {goals.length > 0 && (
                 goals.map((goal,index)=>(
                     <li className="font-bold break-words text-2xl text-wrap text-white p-3" key={index}>{index + 1}.{goal}
-                    <CrossButton ele={goal} setArr={setGoals}/> 
+                    <GoalsCrossButton role={role} goal={goal} setRolesGoals={setRolesGoals}/> 
                     </li>  
                 ))
             )}

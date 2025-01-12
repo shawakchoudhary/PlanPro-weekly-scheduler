@@ -36,7 +36,7 @@ export default function Goals(){
         {roles.length > 0 && (
             roles.map((role,index)=>(
                <div key={index}>
-                 <GoalsCard role = {role} rolesGoals={rolesGoals} />
+                 <GoalsCard role = {role} setRolesGoals={setRolesGoals}/>
                </div>
             ))
         )}

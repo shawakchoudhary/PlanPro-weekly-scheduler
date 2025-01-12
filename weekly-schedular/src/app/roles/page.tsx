@@ -1,7 +1,6 @@
 'use client'
 import {Button, Input} from "@headlessui/react";
 import {SetStateAction, useState} from "react";
-import Link from "next/link";
 import CrossButton from "@/components/cross-button/page";
 import { useRouter } from "next/navigation";
 
