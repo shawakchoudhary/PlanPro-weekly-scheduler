@@ -4,13 +4,18 @@ import {SetStateAction, useState} from "react";
 import CrossButton from "@/components/cross-button/page";
 import { useRouter } from "next/navigation";
 
+interface RoleGoals {
+    role: string;
+    goals: string[];
+  }
+
 export default function Roles(){
-    const [roles,setRoles] = useState<string[]>([]);    
-    const [newRole, setNewRole] = useState("");
+   const [newRole,setNewRole] = useState<string>("");    
     const router = useRouter();
+    const [rolesGoals,setRolesGoals] = useState<RoleGoals[]>([]);
 
     const handleNext = () => {
-        sessionStorage.setItem('roles', JSON.stringify(roles));
+        sessionStorage.setItem('rolesGoals', JSON.stringify(rolesGoals));
         router.push('roles/goals');
       };
     
@@ -18,8 +23,8 @@ export default function Roles(){
         return setNewRole(e.target.value);
     }
     function handleAddRole(){
-        if(newRole && !roles.includes(newRole)){
-            setRoles([...roles,newRole])
+        if(newRole && !rolesGoals.includes({role:newRole,goals:[]})){
+            setRolesGoals([...rolesGoals,{role:newRole,goals:[]}])
             setNewRole("")
         }
     }
@@ -35,13 +40,13 @@ export default function Roles(){
         Once you&#39;ve identified your key roles, List your key roles below to start creating a balanced and purposeful weekly plan.
         </p>
         <div className="flex justify-center">
-            {roles.length  > 0  && (
-                <div className="flex content-center flex-col border-2 rounded-lg w-96 m-5">
+            {rolesGoals.length  > 0  && (
+                <div className="flex flex-col border-2 rounded-lg w-96 m-7 px-4">
                     <h2 className="font-bold text-center text-3xl text-white m-3">Your Roles:</h2>
                     <ul className="flex flex-col justify-center">
-                    {(roles.map((role, index) => (
-                        <li className="font-bold text-center text-2xl text-white m-3" key={index}>{index + 1}. {role} 
-                           <CrossButton ele = {role} setArr={setRoles} />
+                    {(rolesGoals.map((rg, index) => (
+                        <li className="font-bold text-center break-words text-2xl text-wrap text-white p-3" key={index}>{index + 1}.{rg.role} 
+                           <CrossButton ele = {rg.role} setArr={setRolesGoals} />
                         </li>
                     )))}
                     </ul>
@@ -76,7 +81,7 @@ export default function Roles(){
                 <Button
                 onClick={handleNext}
                 className="rounded w-16 bg-sky-600 py-2 px-4 text-sm text-white hover:bg-sky-800 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-                disabled={roles.length === 0}
+                disabled={rolesGoals.length === 0}
                 >
                     Next
                 </Button>

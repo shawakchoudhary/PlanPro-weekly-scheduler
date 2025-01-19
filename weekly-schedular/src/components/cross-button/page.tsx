@@ -1,13 +1,18 @@
 import {Button} from '@headlessui/react';
 import { Dispatch, SetStateAction } from 'react';
+
+interface RoleGoals {
+    role: string;
+    goals: string[];
+  }
+
 type Props = {
     ele : string
-    setArr : Dispatch<SetStateAction<string[]>>
+    setArr : Dispatch<SetStateAction<RoleGoals[]>>
 }
 export default function CrossButton({ele,setArr} : Props){
-   // const {ele, arr, setArr} = props;
     const handleCancelClick = ()=>{
-        setArr((prevArr) => prevArr.filter((item) => item !== ele));
+        setArr((prevArr) => prevArr.filter((item) => item.role !== ele));
     }
     return   <Button
                     onClick={handleCancelClick}

@@ -1,22 +1,29 @@
 'use client'
-
-import Link from "next/link";
-import GoalsCard from "../../../components/goals-card/page";
+import GoalsCards from "../../../components/goals-cards/page";
 import { useEffect, useState } from "react";
+import { Button } from "@headlessui/react";
+import { useRouter } from "next/navigation";
 
-interface RoleGoals {
+export interface RoleGoals {
   role: string;
   goals: string[];
 }
 export default function Goals(){
-    const [roles,setRoles] = useState<string[]>([]);
-    const [rolesGoals,setRolesGoals] = useState<RoleGoals[]>(roles.map((role) => ({ role, goals: [] })));
+    const router = useRouter();
+    const [rolesGoals,setRolesGoals] = useState<RoleGoals[]>([]);
     useEffect(() => {
-        const storedRoles = sessionStorage.getItem('roles');
-        if (storedRoles) {
-          setRoles(JSON.parse(storedRoles));
+        const storedRolesGoals = sessionStorage.getItem('rolesGoals');
+        if (storedRolesGoals) {
+          setRolesGoals(JSON.parse(storedRolesGoals));
         }
+
       }, []);
+
+      const handleNext = () => {
+        sessionStorage.setItem('rolesGoals', JSON.stringify(rolesGoals));
+        router.push('/calendar');
+      };
+      const isButtonDisabled = rolesGoals.some(rg => rg.goals.length === 0);;
     return <>
     <h1 className="font-bold text-center text-4xl text-white mt-3">Step 2: Selecting Goals</h1>
     <p className="font text-justify mx-12 text-xl text-white mt-7">
@@ -33,21 +40,16 @@ export default function Goals(){
         <li>3. As a <b>Student</b>, a goal could be <i>&#34;Complete two chapters of the biology textbook by Friday.&#34;</i></li>
     </ul>
         <div className="flex justify-center flex-row flex-wrap">
-        {roles.length > 0 && (
-            roles.map((role,index)=>(
-               <div key={index}>
-                 <GoalsCard role = {role} setRolesGoals={setRolesGoals}/>
-               </div>
-            ))
-        )}
+            <GoalsCards rolesGoals = {rolesGoals} setRolesGoals={setRolesGoals}/>
         </div>
         <div className="flex justify-center">
-        <Link
-        href="/calender"
-        className="rounded w-16 bg-sky-600 py-2 px-4 text-sm text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700"
+        <Button
+        onClick={handleNext}
+        className="rounded w-16 bg-sky-600 py-2 px-4 text-sm text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+        disabled={isButtonDisabled}
         >
             Next
-        </Link>
+        </Button>
        </div>
     </>
 }

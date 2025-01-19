@@ -12,7 +12,6 @@ type Props = {
     setRolesGoals : Dispatch<SetStateAction<RoleGoals[]>>
 }
 export default function GoalsCrossButton({role,goal,setRolesGoals} : Props){
-   // const {ele, arr, setArr} = props;
     const handleCancelClick = ()=>{
         setRolesGoals((prevRolesGoals) =>
             prevRolesGoals.map((rg) =>
@@ -21,6 +20,7 @@ export default function GoalsCrossButton({role,goal,setRolesGoals} : Props){
                 : rg
             )
           );
+
     }
     return   <Button
                     onClick={handleCancelClick}

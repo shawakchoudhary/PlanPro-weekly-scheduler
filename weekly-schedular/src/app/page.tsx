@@ -13,7 +13,7 @@ export default function Home() {
       />
     <div className="flex flex-col absolute inset-0 bg-black/50 flex items-center justify-center">
         <h1 className="font-bold text-center text-7xl text-white">PlanPro Weekly Schedular</h1>
-        <h2 className="text-center font-bold-100 text-4xl text-white">Redefining Weekly Productivity</h2>
+        <h2 className="text-center font-bold-100 text-4xl py-4 text-white">Redefining Weekly Productivity</h2>
       <Link
             href="/roles"
             >
