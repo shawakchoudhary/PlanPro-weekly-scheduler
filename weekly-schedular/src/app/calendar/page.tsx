@@ -137,7 +137,7 @@ export default function Calendar() {
 
   return (
     <>
-       <h1 className="font-bold text-center text-4xl text-white mt-3">Step 3: Calendar</h1>
+       <h1 className="font-bold text-center text-4xl text-white mt-3">Step 3: Update Calendar</h1>
       {<main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="grid grid-cols-10">
           <div className="col-span-8">
