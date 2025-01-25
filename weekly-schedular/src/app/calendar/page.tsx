@@ -32,10 +32,11 @@ export default function Calendar() {
   const [showModal, setShowModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [idToDelete, setIdToDelete] = useState<number | null>(null)
+  const [deleteEvent,setDeleteEvent] = useState<Event>()
   const [newEvent, setNewEvent] = useState<Event>({
-    role: '',
-    goal: '',
-    start:'',
+    role: "",
+    goal: "",
+    start: "",
     allDay: false,
     id: 0
   })
@@ -72,10 +73,11 @@ export default function Calendar() {
       new Draggable(draggableEl, {
         itemSelector: ".fc-event",
         eventData: function (eventEl) {
-          const title = eventEl.getAttribute("title")
+          const role = eventEl.getAttribute("role")
+          const goal = eventEl.getAttribute("goal")
           const id = eventEl.getAttribute("data")
           const start = eventEl.getAttribute("start")
-          return { title, id, start }
+          return { role,goal, id, start }
         }
       })
     }
@@ -87,12 +89,17 @@ export default function Calendar() {
   }
 
   function addEvent(data: DropArg) {
-    const event = { ...newEvent, start: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() }
+    const event = { ...newEvent, start: data.date.toISOString(), role: data.draggedEl.role?? "unknown", title : data.draggedEl.innerText, goal : data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() }
     setAllEvents([...allEvents, event])
   }
 
   function handleDeleteModal(data: { event: { id: string } }) {
     setShowDeleteModal(true)
+    const foundEvent = allEvents.find((event) => event.id === Number(data.event.id)); 
+
+    if (foundEvent) {
+      setDeleteEvent(foundEvent); 
+    }
     setIdToDelete(Number(data.event.id))
   }
 
@@ -137,21 +144,26 @@ export default function Calendar() {
 
   return (
     <>
-       <h1 className="font-bold text-center text-4xl text-white mt-3">Step 3: Update Calendar</h1>
+       <h1 className="font-bold text-center text-4xl text-white mt-3">Step 3: Prioritize and Plan Your Week</h1>
+       <p className="font text-justify mx-24 text-xl text-white mt-7">
+      Now that you&#39;ve defined your roles and goals, it&#39;s time to schedule them for the current week.
+      Review your goals for each role and block specific time slots in your calendar to focus on them.
+      Prioritize tasks that are most meaningful and align with your long-term vision, ensuring your week reflects what truly matters.
+    </p>
       {<main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="grid grid-cols-10">
-          <div className="col-span-8">
+        <div className="grid grid-cols-12">
+          <div className="col-span-9">
 
             <FullCalendar
                 plugins={[
+                  timeGridPlugin,
                   dayGridPlugin,
                   interactionPlugin,
-                  timeGridPlugin
                 ]}
               headerToolbar={{
                 left: 'prev,next today',
                 center: 'title',
-                right: 'resourceTimelineWook, dayGridMonth,timeGridWeek'
+                right: 'timeGridWeek,dayGridMonth'
               }}
               events={allEvents as EventSourceInput}
               nowIndicator={true}
@@ -161,14 +173,14 @@ export default function Calendar() {
               selectMirror={true}
               dateClick={handleDateClick}
               drop={(data: DropArg) => addEvent(data)}
-              eventClick={(data: { event: { id: string } }) => handleDeleteModal(data)}
+              eventClick={(data: { event: { id: string}; }) => handleDeleteModal(data)}
             />
           </div>
-          <div id="draggable-el" className="ml-4 w-full text-wrap border-2 p-2 rounded-md mt-16 lg:h-1/2 bg-violet-50">
+          <div id="draggable-el" className="ml-8 w-[250px] text-wrap border-2 p-2 rounded-md mt-16 lg:h-1/2 bg-violet-50">
             <h1 className="font-bold text-lg text-center">Drag Goals</h1>
             {events.map(event => (
               <div
-                className="fc-event text-wrap break-words border-2 p-1 m-2 w-full rounded-md ml-auto text-center bg-white"
+                className="fc-event cursor-pointer text-wrap break-words border-2 p-1 m-2 w-full rounded-md ml-auto text-center bg-white"
                 role={event.role}
                 key={event.id}
               >
@@ -217,6 +229,11 @@ export default function Calendar() {
                           <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
                             Delete Event
                           </DialogTitle>
+                          <div className="mt-4 bg-gray-100 p-3 rounded-md">
+                            <h4 className="text-sm font-medium text-gray-800">
+                               Event: {deleteEvent?.goal || "N/A"}
+                            </h4>
+                          </div>
                           <div className="mt-2">
                             <p className="text-sm text-gray-500">
                               Are you sure you want to delete this event?
